@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <title>Perfil</title>
+</head>
+<body onload="verSidebarRole(); lerDados()">
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+    <script src="../JAVASCRIPT/carregamentoDadosPerfil.js"></script>
+
+    <section class="container-perfil">
+        <div class="formulario-container">
+            <div>
+                <label for="razao-social">Razão Social</label>
+                <input type="text" value="" id="razaoSocial" disabled>
+            </div>
+            <div>
+                <label for="Cnpj">CNPJ</label>
+                <input type="text" value="" id="cnpj" disabled>
+            </div>
+            <div>
+                <label for="Core">Core</label>
+                <input type="text" value="" id="core" disabled>
+            </div>
+            <div>
+                <label for="Fone">Fone</label>
+                <input type="text" id="fone" value="">
+            </div>
+            <div>
+                <label for="Email">Email</label>
+                <input type="text" id="email" value="">
+            </div>
+            <div>
+                <label for="Senha">Senha</label>
+                <input type="password" id="senha" value="">
+            </div>
+            <button class="botao-salvar" onclick="salvar()">Salvar</button>
+        </div>
+    </section>
+</body>
+</html>

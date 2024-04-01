@@ -1,0 +1,67 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/mensagem.css" />
+    <title>Mensagem</title>
+    <script src="../JAVASCRIPT/MensagensApi.js"></script>
+    <style>
+      body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0 auto;
+      }
+      .inputConteudo {
+        position: fixed;
+        display: inline-flex;
+        justify-content: space-between;
+        margin: 20px auto;
+        width: 1000px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        bottom: 0;
+      }
+
+      #mensagens{
+        color: grey;
+        display: flex;
+        flex-direction: column;
+      }
+      .mensagem{
+        margin-left: 20%;
+      }
+      input{
+        margin: 10px;
+      }
+
+
+    </style>
+  </head>
+
+  <body onload="getmensagem(); verSidebarRole()">
+    <!-- HEADER -->
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <section class="mensagem">
+      <h1>Mensagens</h1>
+      <div class="telaMensagens">
+        <div>
+          <table>
+            <tbody id="mensagens">
+              <tr><td class="conteudo">Bom dia</td><td class="dataMensagens">29/08/2020</td><td><button onclick="deletar(1)">X</button><button onclick="alterar(1)">Alt</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="inputConteudo">
+            <input type="text" placeholder="Escreva aqui" id="Conteudo">
+            <input type="datetime-local" placeholder="Data de Exclusão" id="data">
+            <button onclick="postmensagem()" id="botaoVerse"><a id="botaoVerseNome">Enviar</a></button>
+          </div>
+      </div>
+    </section>
+  </body>
+</html>

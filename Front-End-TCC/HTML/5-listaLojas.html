@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/listaLojas.css" />
+    <title>Lojas</title>
+  </head>
+
+  <body onload="get(); verSidebarRole()">
+    <script src="../JAVASCRIPT/LojaApi.js"></script>
+    <script src="../JAVASCRIPT/AlertaApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main id="conteudo">
+      <section id="filtro-lista-lojas">
+        <div class="filtro-lojas">
+          <label for="pesquisarLojas">Loja:</label>
+          <input
+            type="text"
+            id="pesquisarLojas"
+            name="pesquisarLojas"
+            placeholder="Buscar por Loja"
+            onkeyup="filterLojas()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-representantes">
+          <label for="pesquisarRepresentante">Representante:</label>
+          <input
+            type="text"
+            id="pesquisarRepresentante"
+            name="pesquisarRepresentante"
+            placeholder="Buscar por Representante"
+            onkeyup="filterRepresentantes()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-lista-status">
+          <select class="notas-fiscais-status">
+            <option value="selecionarStatus">- Status -</option>
+            <option class="status" value="Ativo">Ativo</option>
+            <option class="status" value="Inativo">Inativo</option>
+            <option class="status" value="Inativo">Todos</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="container-lista">
+        <div class="tabela">
+          <table class="table">
+            <thead>
+              <tr>
+                <th id="ordenar-razao-social">
+                  Loja<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th>Cnpj</th>
+                <th>Fone</th>
+                <th>Email</th>
+                <th>Cep</th>
+                <th id="ordenar-segmento">
+                  Segmento<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th id="ordenar-status">
+                  Status<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th class="espacoAcoes">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tableloja"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <div class="first">&#171;</div>
+          <div class="prev">&lt;</div>
+          <div class="numbers">
+            <div>1</div>
+          </div>
+          <div class="next">&gt;</div>
+          <div class="last">&#187;</div>
+        </div>
+      </section>
+    </main>
+
+    <div id="janela-detalhes">
+      <div class="modal">
+        <div class="titulo-modal">
+          <img src="../img/icon-details.png" alt="Ícone de detalhes" />
+          <h2>Detalhes da Loja</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link">Dados</a></div>
+            <div class="titulo-nav"><a id="endereco-link">Endereço</a></div>
+            <div class="titulo-nav"><a id="pedidos-link">Pedidos</a></div>
+            <div class="titulo-nav"><a id="alerta-link">Alerta</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value="Janete Modas"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value="123.123.123/0001-42"
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value="janete.modas@gmail.com"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="inscEstadual"
+                    >Inscrição Estadual:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="inscEstadual"
+                    type="text"
+                    value="388.108.598.269"
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value="(12) 1234-1234"
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section id="enderecos-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="cep">Cep: </label>
+                  <input
+                    class="respostas"
+                    id="cep"
+                    type="text"
+                    value="12345-567"
+                    disabled
+                  />
+
+                  <label class="titulos" for="rua">Rua: </label>
+                  <input
+                    class="respostas"
+                    id="rua"
+                    type="text"
+                    value="São Vicente"
+                    disabled
+                  />
+
+                  <label class="titulos" for="numero">N°: </label>
+                  <input
+                    class="respostas"
+                    id="numero"
+                    type="text"
+                    value="167"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="bairro">Bairro: </label>
+                  <input
+                    class="respostas"
+                    id="bairro"
+                    type="text"
+                    value="Velha"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cidade">Cidade: </label>
+                  <input
+                    class="respostas"
+                    id="cidade"
+                    type="text"
+                    value="Blumenau"
+                    disabled
+                  />
+
+                  <label class="titulos" for="estado">Estado: </label>
+                  <input
+                    class="respostas"
+                    id="estado"
+                    type="text"
+                    value="SC"
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section id="pedidos-detalhes">
+              <table class="table-">
+                <thead>
+                  <tr>
+                    <th>N°<span class="arrow-icon">&#x25BC;</span></th>
+                    <th>Fornecedor<span class="arrow-icon">&#x25BC;</span></th>
+                    <th>Comissão</th>
+                    <th>Data</th>
+                    <th>Valor Total</th>
+                    <th>Quant. Produto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td>3</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Fipa Têxtil</td>
+                    <td>10%</td>
+                    <td>05/05/2005</td>
+                    <td>R$ 100.120,33</td>
+                    <td>280</td>
+                  </tr> -->
+                </tbody>
+              </table>
+              <div class="somaPedidos">
+                <p>
+                  <b>Quantidade Pedidos: </b
+                  ><span id="somaQuantidadePedidos">8</span>
+                </p>
+                <p>
+                  <b>Valor Total: </b
+                  ><span id="somaTotalPedidos">R$ 800.962,64</span>
+                </p>
+                <p>
+                  <b>Ganho: </b
+                  ><span id="somaValorPorcentagemPedidos">R$ 80.096,26</span>
+                </p>
+              </div>
+            </section>
+
+            <section id="alerta-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="definir-alerta">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="razaoSocial"
+                    placeholder="Janete modas"
+                  />
+
+                  <label class="titulos" for="cnpj">CNPJ: </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="cnpj"
+                    placeholder="123.123.123/0001-42"
+                  />
+
+                  <label class="titulos" for="tempoDefinido">Tempo: </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="tempoDefinido"
+                    placeholder="2 mês(es)"
+                    oninput="updateValue(this.value)"
+                  />
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <div id="janela-editar">
+      <div class="modal">
+        <div class="titulo-modal-editar">
+          <img src="../img/icon-edit.png" alt="Ícone de editar" />
+          <h2>Editar Loja</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link-editar">Dados</a></div>
+            <div class="titulo-nav">
+              <a id="endereco-link-editar">Endereço</a>
+            </div>
+            <div class="titulo-nav"><a id="alerta-link-editar">Alerta</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-editar">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value="Janete Modas"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value="123.123.123/0001-42"
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value="janete.modas@gmail.com"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="inscEstadual"
+                    >Inscrição Estadual:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="inscEstadual"
+                    type="text"
+                    value="388.108.598.269"
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value="(12) 1234-1234"
+                    disabled
+                  />
+
+                  <div class="botao-editar">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="enderecos-editar">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="cep">Cep: </label>
+                  <input
+                    class="respostas"
+                    id="cep"
+                    type="text"
+                    value="12345-567"
+                    disabled
+                  />
+
+                  <label class="titulos" for="rua">Rua: </label>
+                  <input
+                    class="respostas"
+                    id="rua"
+                    type="text"
+                    value="São Vicente"
+                    disabled
+                  />
+
+                  <label class="titulos" for="numero">N°: </label>
+                  <input
+                    class="respostas"
+                    id="numero"
+                    type="text"
+                    value="167"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="bairro">Bairro: </label>
+                  <input
+                    class="respostas"
+                    id="bairro"
+                    type="text"
+                    value="Velha"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cidade">Cidade: </label>
+                  <input
+                    class="respostas"
+                    id="cidade"
+                    type="text"
+                    value="Blumenau"
+                    disabled
+                  />
+
+                  <label class="titulos" for="estado">Estado: </label>
+                  <input
+                    class="respostas"
+                    id="estado"
+                    type="text"
+                    value="SC"
+                    disabled
+                  />
+
+                  <div class="botao-editar">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="alerta-editar">
+              <div class="cadastrosFormulario">
+                <div class="definir-alerta">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="razaoSocial"
+                    placeholder="Janete modas"
+                  />
+
+                  <label class="titulos" for="cnpj">CNPJ: </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="cnpj"
+                    placeholder="123.123.123/0001-42"
+                  />
+
+                  <label class="titulos" for="tempoDefinido">Tempo: </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="tempoDefinido"
+                    placeholder="2 mês(es)"
+                    oninput="updateValue(this.value)"
+                  />
+
+                  <div class="botao">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <div id="janela-alertas">
+      <div class="modal">
+        <div class="titulo-modal-alerta">
+          <img src="../img/icon-alert.png" alt="Ícone de Alerta" />
+          <h2>Definir Alerta</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav">
+              <a id="definir-link">Definir Alerta</a>
+            </div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="alerta-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="definir-alerta">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="razaoSocial"
+                    id="lojanome123"
+                    readonly
+                  />
+
+                  <label class="titulos" for="cnpj">CNPJ: </label>
+                  <input
+                    class="respostas"
+                    type="text"
+                    id="cnpj"
+                    id="cnpj123"
+                    readonly
+                  />
+
+                  <label class="titulos" for="tempoDefinido">Tempo: </label>
+                  <input
+                    class="respostas"
+                    type="date"
+                    id="tempoDefinido123"
+                    placeholder="Insira o tempo desejado"
+                    oninput="updateValue(this.value)"
+                  />
+
+                  <div class="botao">
+                    <button class="btn-salvar" onclick="postLembrete()">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <script src="../JAVASCRIPT/detalhes.js"></script>
+    <script src="../JAVASCRIPT/editar.js"></script>
+    <script src="../JAVASCRIPT/definirAlerta.js"></script>
+    <!-- <script src="../JAVASCRIPT/ordenarListas.js"></script> -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dadosDetalhes = document.getElementById("dados-detalhes");
+        const enderecoDetalhes = document.getElementById("enderecos-detalhes");
+        const pedidosDetalhes = document.getElementById("pedidos-detalhes");
+        const alertaDetalhes = document.getElementById("alerta-detalhes");
+
+        const dadosLink = document.getElementById("dados-link");
+        const enderecoLink = document.getElementById("endereco-link");
+        const pedidosLink = document.getElementById("pedidos-link");
+        const alertaLink = document.getElementById("alerta-link");
+
+        dadosDetalhes.style.display = "block";
+        enderecoDetalhes.style.display = "none";
+        pedidosDetalhes.style.display = "none";
+        alertaDetalhes.style.display = "none";
+
+        dadosLink.classList.add("selecionado");
+
+        dadosLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "block";
+          enderecoDetalhes.style.display = "none";
+          pedidosDetalhes.style.display = "none";
+          alertaDetalhes.style.display = "none";
+
+          dadosLink.classList.add("selecionado");
+          enderecoLink.classList.remove("selecionado");
+          pedidosLink.classList.remove("selecionado");
+          alertaLink.classList.remove("selecionado");
+        });
+
+        enderecoLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "none";
+          enderecoDetalhes.style.display = "block";
+          pedidosDetalhes.style.display = "none";
+          alertaDetalhes.style.display = "none";
+
+          dadosLink.classList.remove("selecionado");
+          enderecoLink.classList.add("selecionado");
+          pedidosLink.classList.remove("selecionado");
+          alertaLink.classList.remove("selecionado");
+        });
+
+        pedidosLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "none";
+          enderecoDetalhes.style.display = "none";
+          pedidosDetalhes.style.display = "block";
+          alertaDetalhes.style.display = "none";
+
+          dadosLink.classList.remove("selecionado");
+          enderecoLink.classList.remove("selecionado");
+          pedidosLink.classList.add("selecionado");
+          alertaLink.classList.remove("selecionado");
+        });
+
+        alertaLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "none";
+          enderecoDetalhes.style.display = "none";
+          pedidosDetalhes.style.display = "none";
+          alertaDetalhes.style.display = "block";
+
+          dadosLink.classList.remove("selecionado");
+          enderecoLink.classList.remove("selecionado");
+          pedidosLink.classList.remove("selecionado");
+          alertaLink.classList.add("selecionado");
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dadosEditar = document.getElementById("dados-editar");
+        const enderecoEditar = document.getElementById("enderecos-editar");
+        const alertaEditar = document.getElementById("alerta-editar");
+
+        const dadosLinkEditar = document.getElementById("dados-link-editar");
+        const enderecoLinkEditar = document.getElementById(
+          "endereco-link-editar"
+        );
+        const alertaLinkEditar = document.getElementById("alerta-link-editar");
+
+        // Mostra os dados e esconde o endereço por padrão
+        dadosEditar.style.display = "block";
+        enderecoEditar.style.display = "none";
+        alertaEditar.style.display = "none";
+
+        // Adiciona a classe 'selecionado' ao link de dados
+        dadosLinkEditar.classList.add("selecionado");
+
+        // Eventos de clique nos links
+        dadosLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "block";
+          enderecoEditar.style.display = "none";
+          alertaEditar.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove dos outros
+          dadosLinkEditar.classList.add("selecionado");
+          enderecoLinkEditar.classList.remove("selecionado");
+          alertaLinkEditar.classList.remove("selecionado");
+        });
+
+        enderecoLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "none";
+          enderecoEditar.style.display = "block";
+          alertaEditar.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove dos outros
+          dadosLinkEditar.classList.remove("selecionado");
+          enderecoLinkEditar.classList.add("selecionado");
+          alertaLinkEditar.classList.remove("selecionado");
+        });
+
+        alertaLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "none";
+          enderecoEditar.style.display = "none";
+          alertaEditar.style.display = "block";
+
+          // Adiciona classe 'selecionado' ao link atual e remove dos outros
+          dadosLinkEditar.classList.remove("selecionado");
+          enderecoLinkEditar.classList.remove("selecionado");
+          alertaLinkEditar.classList.add("selecionado");
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector(".table");
+        const thRazaoSocial = document.getElementById("ordenar-razao-social");
+        const thStatus = document.getElementById("ordenar-status");
+        const thSegmento = document.getElementById("ordenar-segmento");
+
+        let ordenacaoRazaoSocial = false;
+        let ordenacaoStatus = false;
+        let ordenacaoSegmento = false;
+
+        thRazaoSocial.addEventListener("click", function () {
+          ordenarColuna(table, 0, ordenacaoRazaoSocial);
+          ordenacaoRazaoSocial = !ordenacaoRazaoSocial;
+          atualizarIcone(thRazaoSocial, ordenacaoRazaoSocial);
+        });
+
+        thStatus.addEventListener("click", function () {
+          ordenarColuna(table, 6, ordenacaoStatus);
+          ordenacaoStatus = !ordenacaoStatus;
+          atualizarIcone(thStatus, ordenacaoStatus);
+        });
+
+        thSegmento.addEventListener("click", function () {
+          ordenarColuna(table, 5, ordenacaoSegmento);
+          ordenacaoSegmento = !ordenacaoSegmento;
+          atualizarIcone(thSegmento, ordenacaoSegmento);
+        });
+
+        function ordenarColuna(table, colIndex, ascendente) {
+          const tbody = table.querySelector("tbody");
+          const linhas = Array.from(tbody.querySelectorAll("tr"));
+          const ordenacao = ascendente ? 1 : -1;
+
+          linhas.sort((a, b) => {
+            const valorA = a.cells[colIndex].textContent.trim();
+            const valorB = b.cells[colIndex].textContent.trim();
+
+            // Se estiver ordenando por status
+            if (colIndex === 1) {
+              return (statusToInt(valorA) - statusToInt(valorB)) * ordenacao;
+            }
+
+            // Se estiver ordenando por segmento
+            if (colIndex === 5) {
+              return valorA.localeCompare(valorB) * ordenacao;
+            }
+
+            return valorA.localeCompare(valorB) * ordenacao;
+          });
+
+          linhas.forEach((linha) => tbody.appendChild(linha));
+        }
+
+        function statusToInt(status) {
+          switch (status) {
+            case "Ativo":
+              return 0;
+            case "Inativo":
+              return 1;
+            default:
+              return 2;
+          }
+        }
+
+        function atualizarIcone(coluna, ascending) {
+          const arrowIcon = coluna.querySelector(".arrow-icon");
+          arrowIcon.textContent = ascending ? "▼" : "▲";
+        }
+      });
+    </script>
+
+    <script>
+      function filterLojas() {
+        const input = document
+          .getElementById("pesquisarLojas")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tableloja");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+
+      function filterRepresentantes() {
+        const input = document
+          .getElementById("pesquisarRepresentante")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tablerepre");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+.container-perfil {
+  margin-left: 20%;
+  display: flex;
+  justify-content: flex-start;
+}
+.formulario-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.container-perfil div {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.container-perfil div label {
+  font-family: Verdana;
+  font-weight: 500;
+  width: 70px;
+}
+.container-perfil div input {
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.botao-salvar {
+  border: 2px solid transparent;
+  padding: 5px 10px;
+  color: white;
+  background-color: hsl(221, 89%, 51%);
+  border-radius: 10px;
+  transition: 0.5s;
+}
+.botao-salvar:hover {
+  border: 2px solid hsl(221, 89%, 51%);
+  padding: 5px 10px;
+  color: hsl(221, 89%, 51%);
+  background-color: transparent;
+  border-radius: 10px;
+}
+body {
+  display: flex;
+  overflow-x: hidden;
+}

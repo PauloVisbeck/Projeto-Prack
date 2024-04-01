@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/cadastroFormulario.css" />
+    <link rel="stylesheet" href="../CSS/mensagemSalvoSucesso.css" />
+    <title>Cadastros Loja</title>
+  </head>
+  <body onload="verSidebarRole()">
+    <script src="../JAVASCRIPT/LojaApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main>
+      <div class="cadastrosFormulario">
+        <form>
+          <div class="formulario">
+            <p>Cadastrar Loja</p>
+            <input
+              type="text"
+              id="cep"
+              onkeyup="dadosEndereco()"
+              placeholder="Cep: "
+            />
+            <input type="text" id="rua" placeholder="Rua: " />
+            <input type="text" id="numero" placeholder="Número: " />
+            <input type="text" id="bairro" placeholder="Bairro: " />
+            <input type="text" id="cidade" placeholder="Cidade: " />
+            <input type="text" id="estado" placeholder="Estado: " />
+          </div>
+          <div class="botao">
+            <button class="btn-cancelar">
+              <a href="./7.1-Lojista.html">Voltar</a>
+            </button>
+
+            <button
+              onclick="post()"
+              class="btn-salvar"
+              type="button"
+            >
+              <a>Salvar</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div class="janelaModal" id="janelaModal">
+      <div class="modal">
+        <h2>Cadastro salvo com sucesso!</h2>
+
+        <button class="fechar" id="fechar">
+          <a href="./5-listaLojas.html">OK</a>
+        </button>
+      </div>
+    </div>
+    <script src="../JAVASCRIPT/notificação.js"></script>
+    <script src="../JAVASCRIPT/mensagemSalvoSucesso.js"></script>
+    <script src="../JAVASCRIPT/pesquisarCep.js"></script>
+  </body>
+</html>

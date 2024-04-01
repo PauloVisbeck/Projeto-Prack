@@ -1,0 +1,402 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  background-color: #262324;
+  display: flex;
+  justify-content: left;
+  align-items: top;
+  flex-direction: column;
+  width: 17vw;
+  height: 100vh;
+  position: fixed;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header nav div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+header nav div h1 {
+  font-size: 1.5em;
+  font-family: monospace;
+  color: white;
+  font-weight: 500;
+  margin-left: 10px;
+}
+header nav ul {
+  margin-top: 10px;
+  font-family: monospace;
+  list-style-type: none;
+}
+header nav li {
+  display: flex;
+  width: 16vw;
+  padding: 5px 5px 5px 25px;
+  transition: all 0.2s;
+  border-radius: 0px 20px 20px 0px;
+  text-decoration: none;
+}
+header nav li:hover {
+  background-color: hsl(221, 89%, 51%);
+}
+header nav li img {
+  width: 1.9vw;
+  margin-right: 4px;
+}
+header nav li a {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  color: white;
+  text-decoration: none;
+}
+.marca-logo {
+  color: rgb(19, 89, 241);
+  text-align: center;
+  font-size: 3em;
+  font-family: verdana;
+}
+.sair{
+  display: flex;
+  justify-content: left;
+  margin-top: 10;
+  margin-left: 25px;
+}
+.sair img{
+  margin-right: 5px;
+  width: 23px;
+  height: auto;
+}
+.sair a{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1.3em;
+  font-family: helvetica;
+  font-weight: bold;
+  text-decoration: none;
+}
+.sair a:hover{
+  text-decoration: underline;
+}
+/* Estilos para dispositivos extra pequenos (menos de 576px) */
+@media (max-width: 575.98px) {
+  header {
+    background-color: #262324;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    flex-direction: column;
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+  }
+  .nome {
+    display: none;
+  }
+  header nav div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
+
+  header nav div h1 {
+    font-size: 1.5em;
+    font-family: monospace;
+    color: white;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+
+  header nav ul {
+    margin-top: 10px;
+    font-family: monospace;
+    list-style-type: none;
+  }
+
+  header nav li{
+    display: flex;
+   
+    width: 20vw;
+    padding: 10px 5px 10px 25px;
+    transition: all 0.2s;
+    border-radius: 0px 20px 20px 0px;
+    text-decoration: none;
+  }
+
+  header nav li:hover {
+    background-color: hsl(221, 89%, 51%);
+  }
+
+  header nav li img {
+    width: 6vw;
+    margin-right: 4px;
+  }
+
+  .sino {
+    display: none;
+  }
+  .marca-logo {
+    color: rgb(19, 89, 241);
+    text-align: center;
+    font-size: 0.8em;
+    font-family: verdana;
+  }
+  #pedidos{
+    display: none;
+  }
+  #representantes{
+    display: none;
+  }
+  #empresa{
+    display: none;
+  }
+  #lojas{
+    display: none;
+  }
+  
+  
+}
+
+/* Estilos para dispositivos pequenos (de 576px a 767px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  header {
+    background-color: #262324;
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    flex-direction: column;
+    width: 17vw;
+    height: 100vh;
+    position: fixed;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .nome {
+    display: none;
+  }
+  header nav div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
+
+  header nav div h1 {
+    font-size: 1.5em;
+    font-family: monospace;
+    color: white;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+
+  header nav ul {
+    margin-top: 10px;
+    font-family: monospace;
+    list-style-type: none;
+  }
+
+  header nav li {
+    display: flex;
+    width: 16vw;
+    padding: 5px 5px 5px 25px;
+    transition: all 0.2s;
+    border-radius: 0px 20px 20px 0px;
+    text-decoration: none;
+  }
+
+  header nav li:hover {
+    background-color: hsl(221, 89%, 51%);
+  }
+
+  header nav li img {
+    visibility: visible;
+    width: 6vw;
+    margin-right: 4px;
+  }
+
+  header nav li a {
+    visibility: hidden;
+  }
+  .sino {
+    display: none;
+  }
+  .marca-logo {
+    color: rgb(19, 89, 241);
+    text-align: center;
+    font-size: 1em;
+    font-family: verdana;
+
+  }
+  
+}
+
+/* Estilos para dispositivos médios (de 768px a 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+  header {
+    background-color: #262324;
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    flex-direction: column;
+    width: 12vw;
+    height: 100vh;
+    position: fixed;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .nome {
+    display: none;
+  }
+  header nav div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
+
+  header nav div h1 {
+    font-size: 1.5em;
+    font-family: monospace;
+    color: white;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+
+  header nav ul {
+    margin-top: 10px;
+    font-family: monospace;
+    list-style-type: none;
+  }
+
+  header nav li {
+    display: flex;
+    width: 12vw;
+    padding: 5px 5px 5px 25px;
+    transition: all 0.2s;
+    border-radius: 0px 20px 20px 0px;
+    text-decoration: none;
+  }
+
+  header nav li:hover {
+    background-color: hsl(221, 89%, 51%);
+  }
+
+  header nav li img {
+    visibility: visible;
+    width: 6vw;
+    margin-right: 4px;
+  }
+
+  header nav li a {
+    visibility: hidden;
+  }
+  .sino {
+    display: none;
+  }
+  .marca-logo {
+    color: rgb(19, 89, 241);
+    text-align: center;
+    font-size: 1em;
+    font-family: verdana;
+
+  }
+  
+}
+
+/* Estilos para dispositivos grandes (de 992px a 1199px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  header {
+    background-color: #262324;
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    flex-direction: column;
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  header nav div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
+  
+  header nav div h1 {
+    font-size: 1.5em;
+    font-family: monospace;
+    color: white;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+  
+  header nav ul {
+    margin-top: 10px;
+    font-family: monospace;
+    list-style-type: none;
+  }
+  
+  header nav li {
+    display: flex;
+    width: 20vw;
+    padding: 5px 5px 5px 25px;
+    transition: all 0.2s;
+    border-radius: 0px 20px 20px 0px;
+    text-decoration: none;
+  }
+  
+  header nav li:hover {
+    background-color: hsl(221, 89%, 51%);
+  }
+  
+  header nav li img {
+    width: 1.9vw;
+    margin-right: 4px;
+  }
+  
+  header nav li a {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .marca-logo {
+    color: rgb(19, 89, 241);
+    text-align: center;
+    font-size: 3em;
+    font-family: verdana;
+  
+  }
+}
+
+/* Estilos para dispositivos extra grandes (1200px ou mais) */
+@media (min-width: 1200px) {}

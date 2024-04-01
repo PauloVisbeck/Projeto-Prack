@@ -1,0 +1,6 @@
+@AgendaPrack_HostAddress = https://localhost:7165
+//https://localhost:7165
+GET {{AgendaPrack_HostAddress}}/Prack/
+Accept: application/json
+
+###

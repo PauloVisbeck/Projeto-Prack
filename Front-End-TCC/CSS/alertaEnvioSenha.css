@@ -1,0 +1,70 @@
+#envioSenha {
+  display: none; 
+  position: relative; 
+  font-size: 20px;  
+  width: 100vw;
+  height: 100vh;
+  margin-top: -52%;
+  margin-left: 116%;
+  align-items: center;   
+  justify-content: center;
+  z-index: 999;
+  background-color: #00000080;
+}
+
+#envioSenha.abrir {
+  display: flex;
+}
+
+.envioSenha p {
+  margin-top: 1px;
+}
+
+.modal {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.973);
+  padding: 20px;
+  border-radius: 10px;
+  justify-content: center;
+  margin-left: 210px;
+  font-size: 15px;
+  font-family: monospace; 
+  align-items: center; 
+}
+.titulo-modal {
+  display: flex;
+  
+}
+.titulo-modal h2 {
+  margin-left: 10px;
+  margin-top: 2px;
+  color: #0000FF;
+  margin-bottom: 30px;
+}
+
+.modal img {
+  margin-top: 30px;
+  height: 60px;
+  width: 60px;  
+}
+
+
+
+.fechar {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: -350px;
+  margin-left: 400px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(233, 0, 0);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+

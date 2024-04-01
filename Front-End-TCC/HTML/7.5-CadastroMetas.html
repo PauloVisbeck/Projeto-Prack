@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/cadastroFormulario.css" />
+    <link rel="stylesheet" href="../CSS/mensagemSalvoSucesso.css" />
+    <title>Metas</title>
+  </head>
+  <body onload="verSidebarRole()">
+    <script src="../JAVASCRIPT/MetasApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main>
+      <div class="cadastrosFormulario">
+        <form>
+          <div class="formulario">
+            <p>Adicionar Meta Escritório</p>
+            <input type="date" id="date" placeholder="Data: " />
+            <input type="number" id="valorMeta" placeholder="Meta: " />
+          </div>
+          <div class="botao">
+            <button class="btn-cancelar">
+              <a href="./7-cadastro.html">Cancelar</a>
+            </button>
+            <button
+              onclick="abrirMensagem(); post()"
+              class="btn-salvar"
+              type="button"
+            >
+              <a>Salvar</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div class="janelaModalMeta" id="janelaModal">
+      <div class="modal">
+        <h2>Meta salva com sucesso!</h2>
+
+        <button class="fechar" id="fechar">
+          <a href="./2-dashBoard.html">OK</a>
+        </button>
+      </div>
+    </div>
+
+    <script src="../JAVASCRIPT/mensagemSalvoSucesso.js"></script>
+    <script src="../JAVASCRIPT/notificação.js"></script>
+  </body>
+</html>

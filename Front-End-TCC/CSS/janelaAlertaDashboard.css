@@ -1,0 +1,116 @@
+.janelaModal {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000080;
+  backdrop-filter: blur(1px);
+  font-family: helvetica;
+}
+.modal {
+  position: relative;
+  width: 56%;
+  height: 400px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+  padding-top: 20px;
+  border-radius: 20px;
+  margin-left: 200px;
+  align-items: center;
+  justify-content: center;
+}
+.fechar {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(233, 0, 0);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.janelaModal.abrir {
+  display: flex;
+}
+.table-container {
+  height: 300px;
+  overflow-y: auto;
+  padding-right: 30px;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+#myTable {
+  width: 100%;
+  font-size: 18px;
+  border-collapse: collapse;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.table-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.329);
+  border-radius: 10px;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #262324;
+  border-radius: 10px;
+}
+#myTable thead {
+  background-color: #383637f8;
+  color: rgb(255, 255, 255);
+  font-weight: 300;
+  font-family: verdana;
+}
+tbody tr {
+  border: 1px solid #26232448;
+}
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2cb;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff94;
+}
+td,
+th {
+  text-align: center;
+  padding: 10px;
+}
+.icon-alerta {
+  width: 35px;
+  height: 35px;
+}
+.alertaAviso {
+  font-size: 25px;
+}
+.modal a {
+  position: relative;
+  top: -10px;
+  left: 5px;
+}
+span {
+  cursor: pointer;
+}
+th:nth-child(1),
+td:nth-child(1) {
+  width: 250px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 120px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 100px;
+}

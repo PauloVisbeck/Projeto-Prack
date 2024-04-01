@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../CSS/navbar.css" />
+  <link rel="stylesheet" href="../CSS/dashBoard.css" />
+  <link rel="stylesheet" href="../CSS/janelaAlertaDashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Dashboard</title>
+</head>
+
+<body onload="verSidebarRole();">
+  <!-- HEADER -->
+  <script src="../JAVASCRIPT/sidebar.js"></script>
+
+  <section class="container-caixas">
+    <div class="caixas">
+      <div class="caixa1">
+        <div class="div-caixa">
+          <h3>Total Vendas/mês</h3>
+          <div>
+            <p>R$</p>
+            <span id="TotalDeVendasDoMes"></span>
+          </div>
+        </div>
+        <img src="../img/icon-real.png" alt="Dinheiro" />
+      </div>
+      <div class="caixa2">
+        <div class="div-caixa">
+          <h3>Meta do mês</h3>
+          <div>
+            <p>R$</p>
+            <span id="MetaDoMes"></span>
+          </div>
+        </div>
+        <img src="../img/icon-moeda.png" alt="Dinheiro" />
+      </div>
+      <div class="caixa3">
+        <div class="div-caixa">
+          <h3>Clientes cadastrados/mês</h3>
+          <div>
+            <p id="ClientesCadastrados"></p>
+            <p>clientes</p>
+          </div>
+        </div>
+        <img src="../img/caixa-clientes.png" alt="Dinheiro" />
+      </div>
+    </div>
+    <div class="graficos">
+      <div class="lista">
+        <div>
+          <h1>Venda Acumulada/Ano:</h1>
+          <div>
+            <p>R$</p>
+            <p id="VendaAcumuladaAno"></p>
+          </div>
+        </div>
+        <div>
+          <h1>quantidade de compras:</h1>
+          <p>10</p>
+        </div>
+      </div>
+      <div class="Grafico">
+        <canvas id="grafico-1"></canvas>
+      </div>
+      <div class="Grafico">
+        <canvas id="grafico-2"></canvas>
+      </div>
+      <div class="Grafico">
+        <canvas id="grafico-3"></canvas>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="janelaModal" id="janelaModal">
+    <div class="modal">
+      <img class="icon-alerta" src="../img/mark.png" alt="alert" />
+      <a href="" class="alertaAviso">Inativos</a>
+      <div class="table-container">
+        <table id="myTable">
+          <thead>
+            <tr>
+              <th>Loja</th>
+              <th>Última Compra</th>
+              <th>
+                Tempo
+                <span onclick="orderTempo()" id="arrow-icon">&#x25BC;</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Janete modas</td>
+              <td>03/11/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Padaria Nice</td>
+              <td>03/11/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Farmácia Gustavo</td>
+              <td>03/12/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Mercado da esquina</td>
+              <td>03/11/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Lojas renner</td>
+              <td>16/11/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Marcelo Sports</td>
+              <td>03/12/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Farmácia Panvel</td>
+              <td>03/03/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Supermercado Cooper</td>
+              <td>08/09/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Loja Herkenhoff</td>
+              <td>03/09/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Boutique dos Varais</td>
+              <td>15/10/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Maria Bonita</td>
+              <td>23/05/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Chemise Moda Feminina</td>
+              <td>06/02/2023</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Canela Brotto Moda Plus Size</td>
+              <td>03/10/2023</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="fechar" id="fechar">X</button>
+    </div>
+  </div>
+
+  <script src="../JAVASCRIPT/dashboard.js"></script>
+  <script src="../JAVASCRIPT/alertaDashboard.js"></script>
+  <script src="../JAVASCRIPT/tempoDashboard.js"></script>
+  <script src="../JAVASCRIPT/notificação.js"></script>
+</body>
+
+</html>

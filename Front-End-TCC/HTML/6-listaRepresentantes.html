@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/listaRepresentantes.css" />
+    <title>Representantes</title>
+  </head>
+  <body onload="get();verSidebarRole()">
+    <script src="../JAVASCRIPT/RepresentanteApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main id="conteudo">
+      <section id="filtro-lista-representantes">
+        <div class="filtro-representante">
+          <label for="pesquisarRepresentante">Representante:</label>
+          <input
+            type="text"
+            id="pesquisarRepresentante"
+            name="pesquisarRepresentante"
+            placeholder="Buscar por Representante"
+            onkeyup="filterRepresentantes()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-lista-status">
+          <select class="notas-fiscais-status">
+            <option value="selecionarStatus">- Status -</option>
+            <option class="status" value="Ativo">Ativo</option>
+            <option class="status" value="Inativo">Inativo</option>
+            <option class="status" value="Inativo">Todos</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="container-lista">
+        <div class="tabela">
+          <table class="table">
+            <thead>
+              <tr>
+                <th id="ordenar-razao-social">
+                  Representante<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th>Cnpj</th>
+                <th>Fone</th>
+                <th>Email</th>
+                <th>Core</th>
+                <th>Cargo</th>
+                <th id="ordenar-status">
+                  Status<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th class="espacoAcoes">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tablerepre"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <div class="first">&#171;</div>
+          <div class="prev">&lt;</div>
+          <div class="numbers">
+            <div>1</div>
+          </div>
+          <div class="next">&gt;</div>
+          <div class="last">&#187;</div>
+        </div>
+      </section>
+    </main>
+
+    <div id="janela-detalhes">
+      <div class="modal">
+        <div class="titulo-modal">
+          <img src="../img/icon-details.png" alt="Ícone de detalhes" />
+          <h2>Detalhes do Representante</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link">Dados</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="core">Core: </label>
+                  <input
+                    class="respostas"
+                    id="core"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <div id="janela-editar">
+      <div class="modal">
+        <div class="titulo-modal-editar">
+          <img src="../img/icon-edit.png" alt="Ícone de editar" />
+          <h2>Editar Representante</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link">Dados</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-editar">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="core">Core: </label>
+                  <input
+                    class="respostas"
+                    id="core"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value=""
+                    disabled
+                  />
+
+                  <div class="botao-editar">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <script src="../JAVASCRIPT/detalhes.js"></script>
+    <script src="../JAVASCRIPT/editar.js"></script>
+    <script src="../JAVASCRIPT/ordenarListas.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector(".table");
+        const thRazaoSocial = document.getElementById("ordenar-razao-social");
+        const thStatus = document.getElementById("ordenar-status");
+
+        let ordenacaoRazaoSocial = false;
+        let ordenacaoStatus = false;
+
+        thRazaoSocial.addEventListener("click", function () {
+          ordenarColuna(table, 0, ordenacaoRazaoSocial);
+          ordenacaoRazaoSocial = !ordenacaoRazaoSocial;
+          atualizarIcone(thRazaoSocial, ordenacaoRazaoSocial);
+        });
+
+        thStatus.addEventListener("click", function () {
+          ordenarColuna(table, 5, ordenacaoStatus);
+          ordenacaoStatus = !ordenacaoStatus;
+          atualizarIcone(thStatus, ordenacaoStatus);
+        });
+
+        function ordenarColuna(table, colIndex, ascendente) {
+          const tbody = table.querySelector("tbody");
+          const linhas = Array.from(tbody.querySelectorAll("tr"));
+          const ordenacao = ascendente ? 1 : -1;
+
+          linhas.sort((a, b) => {
+            const valorA = a.cells[colIndex].textContent.trim();
+            const valorB = b.cells[colIndex].textContent.trim();
+
+            // Se estiver ordenando por status
+            if (colIndex === 1) {
+              return (statusToInt(valorA) - statusToInt(valorB)) * ordenacao;
+            }
+
+            return valorA.localeCompare(valorB) * ordenacao;
+          });
+
+          linhas.forEach((linha) => tbody.appendChild(linha));
+        }
+
+        function statusToInt(status) {
+          switch (status) {
+            case "Ativo":
+              return 0;
+            case "Inativo":
+              return 1;
+            default:
+              return 2;
+          }
+        }
+
+        function atualizarIcone(coluna, ascending) {
+          const arrowIcon = coluna.querySelector(".arrow-icon");
+          arrowIcon.textContent = ascending ? "▼" : "▲";
+        }
+      });
+    </script>
+
+    <script>
+      function filterRepresentantes() {
+        const input = document
+          .getElementById("pesquisarRepresentante")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tablerepre");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/listaEmpresas.css" />
+    <title>Empresas</title>
+  </head>
+  <body onload="verSidebarRole(); get();">
+    <script src="../JAVASCRIPT/EmpresaApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main id="conteudo">
+      <section id="filtro-lista-empresas">
+        <div class="filtro-empresa">
+          <label for="pesquisarEmpresa">Empresa:</label>
+          <input
+            type="text"
+            id="pesquisarEmpresa"
+            name="pesquisarEmpresa"
+            placeholder="Buscar por Empresa"
+            onkeyup="filterTable()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-lista-status">
+          <select class="notas-fiscais-status">
+            <option value="selecionarStatus">- Status -</option>
+            <option class="status" value="Ativo">Ativo</option>
+            <option class="status" value="Inativo">Inativo</option>
+            <option class="status" value="Inativo">Todos</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="container-lista">
+        <div class="tabela">
+          <table class="table">
+            <thead>
+              <tr>
+                <th id="ordenar-razao-social">
+                  Empresa<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th>Cnpj</th>
+                <th>Fone</th>
+                <th>Email</th>
+                <th>Cep</th>
+                <th id="ordenar-rua">
+                  Rua<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th>N°</th>
+                <th id="ordenar-status">
+                  Status<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th class="espacoAcoes">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tablempresa"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div class="first">&#171;</div>
+          <div class="prev">&lt;</div>
+          <div class="numbers">
+            <div>1</div>
+          </div>
+          <div class="next">&gt;</div>
+          <div class="last">&#187;</div>
+        </div>
+      </section>
+    </main>
+
+    <div id="janela-detalhes">
+      <div class="modal">
+        <div class="titulo-modal">
+          <img src="../img/icon-details.png" alt="Ícone de detalhes" />
+          <h2>Detalhes da Empresa</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link">Dados</a></div>
+            <div class="titulo-nav"><a id="endereco-link">Endereço</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value="Janete Modas"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value="123.123.123/0001-42"
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value="janete.modas@gmail.com"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="inscEstadual"
+                    >Inscrição Estadual:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="inscEstadual"
+                    type="text"
+                    value="388.108.598.269"
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value="(12) 1234-1234"
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section id="enderecos-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="cep">Cep: </label>
+                  <input
+                    class="respostas"
+                    id="cep"
+                    type="text"
+                    value="12345-567"
+                    disabled
+                  />
+
+                  <label class="titulos" for="rua">Rua: </label>
+                  <input
+                    class="respostas"
+                    id="rua"
+                    type="text"
+                    value="São Vicente"
+                    disabled
+                  />
+
+                  <label class="titulos" for="numero">N°: </label>
+                  <input
+                    class="respostas"
+                    id="numero"
+                    type="text"
+                    value="167"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="bairro">Bairro: </label>
+                  <input
+                    class="respostas"
+                    id="bairro"
+                    type="text"
+                    value="Velha"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cidade">Cidade: </label>
+                  <input
+                    class="respostas"
+                    id="cidade"
+                    type="text"
+                    value="Blumenau"
+                    disabled
+                  />
+
+                  <label class="titulos" for="estado">Estado: </label>
+                  <input
+                    class="respostas"
+                    id="estado"
+                    type="text"
+                    value="SC"
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <div id="janela-editar">
+      <div class="modal">
+        <div class="titulo-modal-editar">
+          <img src="../img/icon-edit.png" alt="Ícone de editar" />
+          <h2>Editar Empresa</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link-editar">Dados</a></div>
+            <div class="titulo-nav">
+              <a id="endereco-link-editar">Endereço</a>
+            </div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-editar">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="razaoSocial"
+                    >Razão Social:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="razaoSocial"
+                    type="text"
+                    value="Janete Modas"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cnpj">Cnpj: </label>
+                  <input
+                    class="respostas"
+                    id="cnpj"
+                    type="text"
+                    value="123.123.123/0001-42"
+                    disabled
+                  />
+
+                  <label class="titulos" for="email">E-mail: </label>
+                  <input
+                    class="respostas"
+                    id="email"
+                    type="text"
+                    value="janete.modas@gmail.com"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="inscEstadual"
+                    >Inscrição Estadual:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="inscEstadual"
+                    type="text"
+                    value="388.108.598.269"
+                    disabled
+                  />
+
+                  <label class="titulos" for="fone">Telefone: </label>
+                  <input
+                    class="respostas"
+                    id="fone"
+                    type="text"
+                    value="(12) 1234-1234"
+                    disabled
+                  />
+
+                  <div class="botao-editar">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="enderecos-editar">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="cep">Cep: </label>
+                  <input
+                    class="respostas"
+                    id="cep"
+                    type="text"
+                    value="12345-567"
+                    disabled
+                  />
+
+                  <label class="titulos" for="rua">Rua: </label>
+                  <input
+                    class="respostas"
+                    id="rua"
+                    type="text"
+                    value="São Vicente"
+                    disabled
+                  />
+
+                  <label class="titulos" for="numero">N°: </label>
+                  <input
+                    class="respostas"
+                    id="numero"
+                    type="text"
+                    value="167"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="bairro">Bairro: </label>
+                  <input
+                    class="respostas"
+                    id="bairro"
+                    type="text"
+                    value="Velha"
+                    disabled
+                  />
+
+                  <label class="titulos" for="cidade">Cidade: </label>
+                  <input
+                    class="respostas"
+                    id="cidade"
+                    type="text"
+                    value="Blumenau"
+                    disabled
+                  />
+
+                  <label class="titulos" for="estado">Estado: </label>
+                  <input
+                    class="respostas"
+                    id="estado"
+                    type="text"
+                    value="SC"
+                    disabled
+                  />
+
+                  <div class="botao-editar">
+                    <button class="btn-salvar">
+                      <a> Salvar</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <script src="../JAVASCRIPT/detalhes.js"></script>
+    <script src="../JAVASCRIPT/editar.js"></script>
+    <script src="../JAVASCRIPT/ordenarListas.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dadosDetalhes = document.getElementById("dados-detalhes");
+        const enderecoDetalhes = document.getElementById("enderecos-detalhes");
+
+        const dadosLink = document.getElementById("dados-link");
+        const enderecoLink = document.getElementById("endereco-link");
+
+        // Mostra os dados e esconde o endereço por padrão
+        dadosDetalhes.style.display = "block";
+        enderecoDetalhes.style.display = "none";
+
+        // Adiciona a classe 'selecionado' ao link de dados
+        dadosLink.classList.add("selecionado");
+
+        // Eventos de clique nos links
+        dadosLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "block";
+          enderecoDetalhes.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLink.classList.add("selecionado");
+          enderecoLink.classList.remove("selecionado");
+        });
+
+        enderecoLink.addEventListener("click", function () {
+          dadosDetalhes.style.display = "none";
+          enderecoDetalhes.style.display = "block";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLink.classList.remove("selecionado");
+          enderecoLink.classList.add("selecionado");
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dadosEditar = document.getElementById("dados-editar");
+        const enderecoEditar = document.getElementById("enderecos-editar");
+
+        const dadosLinkEditar = document.getElementById("dados-link-editar");
+        const enderecoLinkEditar = document.getElementById(
+          "endereco-link-editar"
+        );
+
+        // Mostra os dados e esconde o endereço por padrão
+        dadosEditar.style.display = "block";
+        enderecoEditar.style.display = "none";
+
+        // Adiciona a classe 'selecionado' ao link de dados
+        dadosLinkEditar.classList.add("selecionado");
+
+        // Eventos de clique nos links
+        dadosLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "block";
+          enderecoEditar.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLinkEditar.classList.add("selecionado");
+          enderecoLinkEditar.classList.remove("selecionado");
+        });
+
+        enderecoLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "none";
+          enderecoEditar.style.display = "block";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLinkEditar.classList.remove("selecionado");
+          enderecoLinkEditar.classList.add("selecionado");
+        });
+
+        // Eventos de clique nos links da janela de edição
+        dadosLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "block";
+          enderecoEditar.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLinkEditar.classList.add("selecionado");
+          enderecoLinkEditar.classList.remove("selecionado");
+        });
+
+        enderecoLinkEditar.addEventListener("click", function () {
+          dadosEditar.style.display = "none";
+          enderecoEditar.style.display = "block";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLinkEditar.classList.remove("selecionado");
+          enderecoLinkEditar.classList.add("selecionado");
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector(".table");
+        const thRazaoSocial = document.getElementById("ordenar-razao-social");
+        const thStatus = document.getElementById("ordenar-status");
+        const thRua = document.getElementById("ordenar-rua");
+
+        let ordenacaoRazaoSocial = false;
+        let ordenacaoStatus = false;
+        let ordenacaoRua = false;
+
+        thRazaoSocial.addEventListener("click", function () {
+          ordenarColuna(table, 0, ordenacaoRazaoSocial);
+          ordenacaoRazaoSocial = !ordenacaoRazaoSocial;
+          atualizarIcone(thRazaoSocial, ordenacaoRazaoSocial);
+        });
+
+        thStatus.addEventListener("click", function () {
+          ordenarColuna(table, 6, ordenacaoStatus);
+          ordenacaoStatus = !ordenacaoStatus;
+          atualizarIcone(thStatus, ordenacaoStatus);
+        });
+
+        thRua.addEventListener("click", function () {
+          ordenarColuna(table, 5, ordenacaoRua);
+          ordenacaoRua = !ordenacaoRua;
+          atualizarIcone(thRua, ordenacaoRua);
+        });
+
+        function ordenarColuna(table, colIndex, ascendente) {
+          const tbody = table.querySelector("tbody");
+          const linhas = Array.from(tbody.querySelectorAll("tr"));
+          const ordenacao = ascendente ? 1 : -1;
+
+          linhas.sort((a, b) => {
+            const valorA = a.cells[colIndex].textContent.trim();
+            const valorB = b.cells[colIndex].textContent.trim();
+
+            // Se estiver ordenando por status
+            if (colIndex === 1) {
+              return (statusToInt(valorA) - statusToInt(valorB)) * ordenacao;
+            }
+
+            // Se estiver ordenando por segmento
+            if (colIndex === 5) {
+              return valorA.localeCompare(valorB) * ordenacao;
+            }
+
+            return valorA.localeCompare(valorB) * ordenacao;
+          });
+
+          linhas.forEach((linha) => tbody.appendChild(linha));
+        }
+
+        function statusToInt(status) {
+          switch (status) {
+            case "Ativo":
+              return 0;
+            case "Inativo":
+              return 1;
+            default:
+              return 2;
+          }
+        }
+
+        function atualizarIcone(coluna, ascending) {
+          const arrowIcon = coluna.querySelector(".arrow-icon");
+          arrowIcon.textContent = ascending ? "▼" : "▲";
+        }
+      });
+    </script>
+
+    <script>
+      function filterTable() {
+        const input = document
+          .getElementById("pesquisarEmpresa")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tablempresa");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

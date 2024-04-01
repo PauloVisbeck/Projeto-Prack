@@ -1,0 +1,9 @@
+Nome: Paulo Visbeck
+CNPJ: 22101989000101
+Senha: admin82
+Nível: Admin
+
+Nome: Farol Representações Ltda
+CNPJ: 24061993000101
+Senha: repres82
+Nível: Representante

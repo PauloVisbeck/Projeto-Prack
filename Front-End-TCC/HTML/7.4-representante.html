@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/cadastroFormulario.css" />
+    <link rel="stylesheet" href="../CSS/mensagemSalvoSucesso.css" />
+    <title>Cadastros Representante</title>
+  </head>
+  <body onload="verSidebarRole()">
+    <script src="../JAVASCRIPT/RepresentanteApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main>
+      <div class="cadastrosFormulario">
+        <form>
+          <div class="formulario">
+            <p>Adicionar representante</p>
+            <input type="text" id="cnpj" placeholder="CNPJ: " />
+            <input type="text" id="razaoSocial" placeholder="Representante: " />
+            <input type="text" id="core" placeholder="Core: " />
+            <input type="tel" id="fone" placeholder="Telefone: " />
+            <input type="email" id="email" placeholder="E-mail: " />
+            <input type="password" id="Senha" placeholder="Senha: " />
+          </div>
+          <div class="botao">
+            <button class="btn-cancelar">
+              <a href="./7-cadastro.html">Cancelar</a>
+            </button>
+            <button onclick="post()" class="btn-salvar" type="button">
+              <a>Salvar</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div class="janelaModal" id="janelaModal">
+      <div class="modal">
+        <h2>Cadastro salvo com sucesso!</h2>
+
+        <button class="fechar" id="fechar">
+          <a href="./6-listaRepresentantes.html">OK</a>
+        </button>
+      </div>
+    </div>
+
+    <script src="../JAVASCRIPT/notificação.js"></script>
+    <script src="../JAVASCRIPT/mensagemSalvoSucesso.js"></script>
+  </body>
+</html>

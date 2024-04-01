@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="" type="image/x-icon" />
+  <link rel="stylesheet" href="../CSS/style.css" />
+  <link rel="stylesheet" href="../CSS/alertaEnvioSenha.css" />
+  <title>Login</title>
+  <script src="../JAVASCRIPT/LoginApi.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="formulario-container">
+      <h1>Login</h1>
+      <div>
+        <label for="Cnpj">Cnpj</label>
+        <input type="text" placeholder="Informe seu cnpj" id="cnpjinput" />
+      </div>
+      <div>
+        <label for="Senha">Senha</label>
+        <input type="password" id="senhainput" class="form-control" placeholder="Informe sua senha" />
+      </div>
+      <button type="submit" value="Login" onclick="Login()" class="botao-submit">
+        Entrar
+      </button>
+      <a class="AlertaEnvioDeSenha" href="senhaEnviada()">esqueceu a senha?</a>
+
+      <!--Mensagem de envio de senha por e-mail-->
+      <div id="envioSenha">
+        <div class="modal">
+          <div class="titulo-modal">            
+            <h2 class="direcao">Importante!</h2>
+          </div>
+          <p><b>A senha foi enviada para o e-mail cadastrado no CNPJ informado. Verifique a caixa de entrada ou de
+              span!</b></p>
+              <img class="direcao" src="../img/icon-email.png" alt="ícone de e-mail">
+        </div>
+        <button class="fechar" id="fechar" title="Fechar">X</button>
+      </div>
+    </div>
+
+    <div class="imagem-container">
+      <div class="triangulo-1"></div>
+      <div class="triangulo-2"></div>
+      <h1 class="texto-chamativo">
+        <span>Tornando</span> cada <br /><span>cliente</span> uma
+        <span>prioridade</span>
+      </h1>
+      <img style="width: 50vw; height: auto" src="../img/tablet.png" alt="tablet" class="tablet" />
+    </div>
+  </div>
+  <img src="../img/prack-logo.png" alt="logo prack" class="logo" />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Selecione todos os links com a classe 'envioDeSenha'
+      const linksDefinirAlerta = document.querySelectorAll(".AlertaEnvioDeSenha");
+
+      // Adicione um ouvinte de evento de clique a cada link
+      linksDefinirAlerta.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          event.preventDefault(); // Impede o comportamento padrão do link
+          senhaEnviada(); // Chama a função para informar que a senha foi enviada por e-mail
+        });
+      });
+    });      
+  </script>
+
+  <script>
+    function senhaEnviada() {
+      const alerta = document.getElementById("envioSenha");
+      alerta.classList.add("abrir");
+      console.log();
+
+      alerta.addEventListener("click", (d) => {
+        if (
+          d.target.id == "fechar" ||
+          d.target.id == "envioSenha"
+        ) {
+          alerta.classList.remove("abrir");
+        }
+      });
+    }
+  </script>
+
+
+</body>
+
+</html>

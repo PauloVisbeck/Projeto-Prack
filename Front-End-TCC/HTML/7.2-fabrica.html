@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/cadastroFormulario.css" />
+    <link rel="stylesheet" href="../CSS/cadastrarSegmento.css" />
+    <title>Cadastros Empresa</title>
+  </head>
+  <body onload="verSidebarRole()">
+    <script src="../JAVASCRIPT/EmpresaApi.js"></script>
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+
+    <main>
+      <div class="cadastrosFormulario">
+        <form>
+          <div class="formulario">
+            <p>Cadastrar Fábrica</p>
+            <input type="text" id="cnpj" placeholder="CNPJ: " />
+            <input type="text" id="razaosocial" placeholder="Empresa: "/>
+            <input type="text" id="inscEstadual" placeholder="Inscrição Estadual: "/>
+            <select id="segmento" required>
+              <option>Segmento:</option>
+              <option value="modaInfantil">Infantil</option>
+              <option value="modaFeminino">Adulto</option>
+              <option value="modaMasculino">Moda Íntima</option>
+              <option value="modaMasculino">Moda Praia</option>
+              <option value="modaMasculino">Streetwear</option>
+              <option value="modaMasculino">Surfwear</option>
+              <option value="modaMasculino">Departamento</option>
+              <option value="cadastrar">• Cadastrar novo •</option>
+            </select>
+            <input type="tel" id="fone" placeholder="Telefone: " />
+            <input type="email" id="email" placeholder="E-mail: " />
+          </div>
+          <div class="botao">
+            <button class="btn-cancelar">
+              <a href="./7-cadastro.html">Cancelar</a>
+            </button>
+            <button class="btn-salvar">
+              <a href="7.2.1-enderecoFabrica.html" onclick="guardar()">Próximo</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p>Cadastrar Novo Segmento</p>
+        <form id="form-segmento">
+          <input
+            type="text"
+            id="novo-segmento"
+            placeholder="Digite o novo segmento:"
+          />
+          <button class="btn-cancelarSegmento">
+            <a href="./7-cadastro.html">Cancelar</a>
+          </button>
+          <button class="btn-cadastrarSegmento">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+    <script src="../JAVASCRIPT/notificação.js"></script>
+    <script src="../JAVASCRIPT/cadastrarSegmento.js"></script>
+  </body>
+</html>

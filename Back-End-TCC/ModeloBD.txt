@@ -1,0 +1,96 @@
+create database bd_prack;
+
+CREATE TABLE Empresas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(15) NOT NULL,
+    segmento VARCHAR(50) NOT NULL,
+    inscEstadual VARCHAR(14) NOT NULL,
+    CEP VARCHAR(50) NOT NULL,
+    Cidade VARCHAR(50) NOT NULL,
+    Bairro VARCHAR(50) NOT NULL,
+    rua VARCHAR(50) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    fone VARCHAR(14) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    estado varchar(25) not null,
+    status BOOL NOT NULL
+);
+
+CREATE TABLE Representantes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(15) NOT NULL,
+    fone VARCHAR(14) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    core VARCHAR(50) NOT NULL,
+    status BOOL NOT NULL,
+    senha VARCHAR(125) NOT NULL,
+    cargo VARCHAR(75) NOT NULL
+);
+
+CREATE TABLE Lojas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(15) NOT NULL,
+    inscEstadual VARCHAR(14) NOT NULL,
+    segmento VARCHAR(25) NOT NULL,
+    CEP VARCHAR(50) NOT NULL,
+    Cidade VARCHAR(50) NOT NULL,
+    Bairro VARCHAR(50) NOT NULL,
+    rua VARCHAR(50) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    fone VARCHAR(14) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    estado varchar(25) not null,
+    ultimaCompra date,
+    RepresentanteId int not null,
+    status BOOL NOT NULL
+);
+
+CREATE TABLE Pedidos (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Data DATETIME NOT NULL,
+    PercentualComissao DECIMAL(5 , 2 ) NOT NULL,
+	Colecao VARCHAR(30) NOT NULL,
+    valorTotal decimal (7,2) not null,
+    status BOOL NOT NULL,
+    EmpresaID INT,
+    RepresentanteID INT,
+    LojaID INT,
+    FOREIGN KEY (EmpresaID)
+        REFERENCES Empresas (id),
+    FOREIGN KEY (RepresentanteID)
+        REFERENCES Representantes (id),
+    FOREIGN KEY (LojaID)
+        REFERENCES Lojas (id)
+);
+create table Produtos (
+	Id int not null primary key auto_increment,
+	Descricao varchar(100),
+	Quantidade int not null,
+	ValorUnitario decimal(5,2) not null,
+	PedidoId int not null
+);
+create table Mensagem(
+	Id int not null primary key auto_increment,
+	Conteudo mediumtext not null,
+	Data datetime not null,
+	CancelamentoData datetime not null
+);
+create table Metas(
+	Id int not null auto_increment primary key,
+	Data datetime not null,
+    MetaDeVendas int not null
+);
+create table Lembretes(
+Id int not null primary key auto_increment,
+DataLembrete datetime not null,	
+LojaID INT,
+    FOREIGN KEY (LojaID)
+        REFERENCES Lojas (id)
+);
+drop database bd_prack;
+select * from Empresas;
+select * from Lojas;
+select * from representantes;

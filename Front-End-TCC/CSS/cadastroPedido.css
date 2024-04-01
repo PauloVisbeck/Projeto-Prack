@@ -1,0 +1,140 @@
+#cadastro {
+  background-color: rgb(19, 89, 241);
+  border-radius: 0px 20px 20px 0px;
+}
+body {
+  display: flex;
+  overflow-x: hidden;
+}
+@media only screen and (min-width: 1024px) {
+  /*Coloca as duas divs dentro do main uma ao lado da outra*/
+  .flex-container {
+    display: flex;
+    position: relative;
+    width: calc(100% - 17vw);
+    height: 100%;
+    left: 17vw;
+    top: 2vw;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  /*===============================================================================================*/
+  .cadastrosFormulario form{
+    display: flex;
+    flex-direction: column;
+    width: 34vw;
+    background-color: rgba(184, 184, 184, 0.1);
+    border-radius: 7px;
+    padding: 20px;
+    font-size: 1em;
+    border: 1px solid rgb(179, 179, 179);
+    text-align: center;
+  }
+  .cadastrosFormulario p {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .cadastrosFormulario .formulario input {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 10px 10px 40px rgba(179, 179, 179, 0.3);
+    background-color: rgb(243, 243, 243);
+    padding: 10px;
+    margin: 10px;
+    width: 95%;
+    font-size: 1em;
+  }
+  .cadastrosFormulario .formulario select {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 10px 10px 40px rgba(179, 179, 179, 0.3);
+    background-color: rgb(243, 243, 243);
+    padding: 10px;
+    margin: 10px;
+    width: 95%;
+    font-size: 1em;
+  }
+  .sub-formulario {
+    border-radius: 7px;
+    border: 1px solid rgb(179, 179, 179);
+  }
+  ::placeholder {
+    color: black;
+  }
+  select option {
+    color: black;
+  }
+  .botao {
+    margin-top: 8px;
+  }
+  button a {
+    text-decoration: none;
+    color: white;
+  }
+  .btn-proximo {
+    background-color: rgba(249, 108, 0, 1);
+    border-radius: 10px;
+    width: 90px;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    margin-right: 20px;
+    color: #ffffff;
+  }
+  .btn-salvar {
+    background-color: rgba(0, 13, 249, 1);
+    border-radius: 10px;
+    width: 90px;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    margin-left: 20px;
+    color: #ffffff;
+  }
+  .btn-cancelar {
+    background-color: rgb(233, 0, 0);
+    border-radius: 10px;
+    width: 90px;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    color: #ffffff;
+  }
+
+  /*===============================================================================================*/
+  /*Itens do Pedido:*/
+  /*===============================================================================================*/
+
+  .tabelaProdutos {
+    display: block;
+    flex-direction: column;
+    background-color: rgba(184, 184, 184, 0.1);
+    border-radius: 7px;
+    padding: 20px;
+    width: 40vw;
+    height: 89vh;
+    font-size: 1em;
+    border: 1px solid rgb(179, 179, 179);
+    text-align: center;
+    overflow-y: auto;
+    margin-left: 50px;
+    margin-right: 20px;
+  }
+  .tabela {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    border: 1px solid rgb(179, 179, 179);
+    display: inline-block; /* Faz a tabela se comportar como um bloco em linha */
+  }
+  .tabela td,
+  .tabela th {
+    width: 100px; /*Largura das celulas da tabela*/
+  }
+  .tabela td:first-child,
+  .tabela th:first-child {
+    width: 25px; /*Largura das celulas da primeira coluna tabela*/
+  }
+}

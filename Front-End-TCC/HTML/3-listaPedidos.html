@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/listaPedidos.css" />
+    <link rel="stylesheet" href="../CSS/editar.css" />
+    <title>Pedidos</title>
+  </head>
+  <body onload="get(); verSidebarRole()">
+    <script src="../JAVASCRIPT/sidebar.js"></script>
+    <script src="../JAVASCRIPT/PedidoApi.js"></script>
+    <main id="conteudo">
+      <section id="filtro-lista-pedidos">
+        <div class="filtro-lojas">
+          <label for="pesquisarLojas">Cliente:</label>
+          <input
+            type="text"
+            id="pesquisarLojas"
+            name="pesquisarLojas"
+            placeholder="Buscar por Cliente"
+            onkeyup="filterCliente()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-empresa">
+          <label for="pesquisarEmpresa">Fornecedor:</label>
+          <input
+            type="text"
+            id="pesquisarEmpresa"
+            name="pesquisarEmpresa"
+            placeholder="Buscar por Fornecedor"
+            onkeyup="filterRepresentante()"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-representantes">
+          <label for="pesquisarRepresentante">Representante:</label>
+          <input
+            type="text"
+            id="pesquisarRepresentante"
+            name="pesquisarRepresentante"
+            placeholder="Buscar por Representante"
+          />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="filtro-lista-status">
+          <select class="notas-fiscais-status">
+            <option value="selecionarStatus">- Status -</option>
+            <option class="status" value="Ativo">Recebido</option>
+            <option class="status" value="Inativo">Aguardando</option>
+            <option class="status" value="Inativo">Todos</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="container-lista">
+        <div class="tabela">
+          <table class="table">
+            <thead>
+              <tr>
+                <th id="ordenar-cliente">
+                  Cliente<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th id="ordenar-fornecedor">
+                  Fornecedor<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th>Comissão</th>
+                <th>Data</th>
+                <th>Valor Total</th>
+                <th>Coleção</th>
+                <th id="ordenar-status">
+                  Status<span class="arrow-icon">&#x25BC;</span>
+                </th>
+                <th class="espacoAcoes">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tablepedido"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div class="first">&#171;</div>
+          <div class="prev">&lt;</div>
+          <div class="numbers">
+            <div>1</div>
+          </div>
+          <div class="next">&gt;</div>
+          <div class="last">&#187;</div>
+        </div>
+      </section>
+    </main>
+
+    <div id="janela-detalhes">
+      <div class="modal">
+        <div class="titulo-modal">
+          <img src="../img/icon-details.png" alt="Ícone de detalhes" />
+          <h2>Detalhes do Pedido</h2>
+        </div>
+        <div class="detalhes-modal">
+          <header class="nav-modal">
+            <div class="titulo-nav"><a id="dados-link">Pedido</a></div>
+            <div class="titulo-nav"><a id="itens-link">Itens</a></div>
+          </header>
+
+          <main class="conteudo-modal">
+            <section id="dados-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="cliente">Cliente: </label>
+                  <input
+                    class="respostas"
+                    id="cliente"
+                    type="text"
+                    value="Janete Modas"
+                    disabled
+                  />
+
+                  <label class="titulos" for="fornecedor">Fornecedor: </label>
+                  <input
+                    class="respostas"
+                    id="fornecedor"
+                    type="text"
+                    value="Fipa Textil"
+                    disabled
+                  />
+
+                  <label class="titulos" for="Representante"
+                    >Representante:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="Representante"
+                    type="text"
+                    value="Everton luiz"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <label class="titulos" for="status">Status:</label>
+                  <input
+                    class="resposta-checkbox"
+                    id="status"
+                    type="checkbox"
+                    checked
+                  />
+
+                  <label class="titulos" for="data">Data: </label>
+                  <input
+                    class="respostas"
+                    id="data"
+                    type="date"
+                    value="2024-02-27"
+                    disabled
+                  />
+
+                  <label class="titulos" for="comissao">Comissão: </label>
+                  <input
+                    class="respostas"
+                    id="comissao"
+                    type="text"
+                    value="5%"
+                    disabled
+                  />
+                </div>
+              </div>
+            </section>
+            <section id="itens-detalhes">
+              <div class="cadastrosFormulario">
+                <div class="dados-endereco-esquerdo">
+                  <label class="titulos" for="valorTotal">Valor Total: </label>
+                  <input
+                    class="respostas"
+                    id="valorTotal"
+                    type="number"
+                    value="200.00"
+                    disabled
+                  />
+
+                  <label class="titulos" for="quantidadeItens"
+                    >Quantidade Itens:
+                  </label>
+                  <input
+                    class="respostas"
+                    id="quantidadeItens"
+                    type="number"
+                    value="4"
+                    disabled
+                  />
+
+                  <label class="titulos" for="comissao">Coleção: </label>
+                  <input
+                    class="respostas"
+                    id="comissao"
+                    type="text"
+                    value="Verão 2024"
+                    disabled
+                  />
+                </div>
+                <div class="dados-endereco-direito">
+                  <table class="table-itens-pedido">
+                    <thead>
+                      <tr>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>V. Unitário</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Blusa verde</td>
+                        <td>5</td>
+                        <td>20,00</td>
+                      </tr>
+                      <tr>
+                        <td>Blusa verde</td>
+                        <td>5</td>
+                        <td>20,00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+      <button class="fechar" id="fechar" title="Fechar">X</button>
+    </div>
+
+    <div class="Editar" id="Editar">
+      <div class="janelaEditar">
+        <h2>Editar pedido</h2>
+        <div class="informacaoModal">
+          <div>
+            <label for="cliente">Cliente</label>
+            <input type="text" placeholder="Cliente" />
+          </div>
+          <div>
+            <label for="fornecedor">fornecedor</label>
+            <input type="text" placeholder="fornecedor" />
+          </div>
+          <div>
+            <label for="Comissão">Comissão</label>
+            <input type="number" placeholder="Comissão" />
+          </div>
+          <div>
+            <label for="Data">Data</label>
+            <input type="date" />
+          </div>
+          <div>
+            <label for="Valor Total">Valor Total</label>
+            <input type="number" placeholder="Valor Total" />
+          </div>
+          <div>
+            <label for="Quantidade Total">Quantidade Total</label>
+            <input type="number" placeholder="Quantidade Total" />
+          </div>
+          <div>
+            <label for="Status">Status</label>
+            <input type="checkbox" />
+          </div>
+          <div class="botoes">
+            <button class="botao-editar">Editar</button>
+            <button class="fecharEditar" id="fecharEditar" title="Fechar">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../JAVASCRIPT/editar.js"></script>
+    <script src="../JAVASCRIPT/ordenarListas.js"></script>
+    <script src="../JAVASCRIPT/notificação.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const pedidosDetalhes = document.getElementById("dados-detalhes");
+        const itensDetalhes = document.getElementById("itens-detalhes");
+
+        const dadosLink = document.getElementById("dados-link");
+        const itensLink = document.getElementById("itens-link");
+
+        // Mostra os dados e esconde o endereço por padrão
+        pedidosDetalhes.style.display = "block";
+        itensDetalhes.style.display = "none";
+
+        // Adiciona a classe 'selecionado' ao link de dados
+        dadosLink.classList.add("selecionado");
+
+        // Eventos de clique nos links
+        dadosLink.addEventListener("click", function () {
+          pedidosDetalhes.style.display = "block";
+          itensDetalhes.style.display = "none";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLink.classList.add("selecionado");
+          itensLink.classList.remove("selecionado");
+        });
+
+        itensLink.addEventListener("click", function () {
+          pedidosDetalhes.style.display = "none";
+          itensDetalhes.style.display = "block";
+
+          // Adiciona classe 'selecionado' ao link atual e remove das outros
+          dadosLink.classList.remove("selecionado");
+          itensLink.classList.add("selecionado");
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector(".table");
+        const thCliente = document.getElementById("ordenar-cliente");
+        const thStatus = document.getElementById("ordenar-status");
+        const thFornecedor = document.getElementById("ordenar-fornecedor");
+
+        let ordenacaoCliente = false;
+        let ordenacaoStatus = false;
+        let ordenacaoFornecedor = false;
+
+        thCliente.addEventListener("click", function () {
+          ordenarColuna(table, 0, ordenacaoCliente);
+          ordenacaoCliente = !ordenacaoCliente;
+          atualizarIcone(thCliente, ordenacaoCliente);
+        });
+
+        thStatus.addEventListener("click", function () {
+          ordenarColuna(table, 6, ordenacaoStatus);
+          ordenacaoStatus = !ordenacaoStatus;
+          atualizarIcone(thStatus, ordenacaoStatus);
+        });
+
+        thFornecedor.addEventListener("click", function () {
+          ordenarColuna(table, 1, ordenacaoFornecedor);
+          ordenacaoFornecedor = !ordenacaoFornecedor;
+          atualizarIcone(thFornecedor, ordenacaoFornecedor);
+        });
+
+        function ordenarColuna(table, colIndex, ascendente) {
+          const tbody = table.querySelector("tbody");
+          const linhas = Array.from(tbody.querySelectorAll("tr"));
+          const ordenacao = ascendente ? 1 : -1;
+
+          linhas.sort((a, b) => {
+            const valorA = a.cells[colIndex].textContent.trim();
+            const valorB = b.cells[colIndex].textContent.trim();
+
+            // Se estiver ordenando por status
+            if (colIndex === 1) {
+              return (statusToInt(valorA) - statusToInt(valorB)) * ordenacao;
+            }
+
+            // Se estiver ordenando por segmento
+            if (colIndex === 5) {
+              return valorA.localeCompare(valorB) * ordenacao;
+            }
+
+            return valorA.localeCompare(valorB) * ordenacao;
+          });
+
+          linhas.forEach((linha) => tbody.appendChild(linha));
+        }
+
+        function statusToInt(status) {
+          switch (status) {
+            case "Ativo":
+              return 0;
+            case "Inativo":
+              return 1;
+            default:
+              return 2;
+          }
+        }
+
+        function atualizarIcone(coluna, ascending) {
+          const arrowIcon = coluna.querySelector(".arrow-icon");
+          arrowIcon.textContent = ascending ? "▼" : "▲";
+        }
+      });
+    </script>
+
+    <script>
+      function filterCliente() {
+        const input = document
+          .getElementById("pesquisarLojas")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tablepedido");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+
+      function filterRepresentante() {
+        const input = document
+          .getElementById("pesquisarEmpresa")
+          .value.toLowerCase();
+        const tableBody = document.getElementById("tablepedido");
+        const rows = tableBody.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cell = rows[i].getElementsByTagName("td")[0];
+          const textContent = cell.textContent || cell.innerText;
+          const searchText = input.trim();
+
+          if (textContent.toLowerCase().indexOf(searchText) !== -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
